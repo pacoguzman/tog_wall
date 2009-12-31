@@ -1,0 +1,27 @@
+en:
+  tog_wall:
+    cancel : Cancel
+    model:
+      graffity:
+        comment:
+          label: Comment
+          textarea: What's on your mind?
+      reply:
+        comment:
+          label: Comment
+          textarea: Write your comment...
+    views:
+      walls:
+        show:
+          graffities:
+            not_found: There are not graffities in this wall
+      site:
+        comment:
+          to_comment: Comment                    
+      member:
+        graffities:
+          form:
+            share_graffity: Share
+        replys:
+          form:
+            share_reply: Share            

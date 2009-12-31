@@ -1,0 +1,9 @@
+.hide {display:none;}
+.small {font-size:.9em;}
+.prepend-small {padding-left:50px;}
+/*------------------------------ defaultValueActsAsHint Styles ------------------------------*/
+.hint {
+    color: #aaa;
+    font-style: italic;
+}
+/*--------------------------- End defaultValueActsAsHint Styles ------------------------------*/

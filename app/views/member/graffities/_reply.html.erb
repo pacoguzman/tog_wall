@@ -1,0 +1,14 @@
+<div id="reply_<%= reply.id %>" class="small prepend-small">
+  <div class="float_left">
+    <%= link_to icon_for_profile(reply.profile, 'tiny'), profile_path(reply.profile), :title => reply.profile.full_name %>
+ </div>
+  <div>
+    <div class="text">
+      <span><%= link_to reply.profile.full_name, profile_path(reply.profile), :title => reply.profile.full_name %></span>
+      <span><%= h reply.comment %></span>
+    </div>
+    <div class="more">
+      <span class="datetime"><%= graffity_created_at_in_words(reply.created_at) %></span>
+    </div>
+  </div>
+</div>

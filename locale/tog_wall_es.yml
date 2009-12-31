@@ -1,0 +1,27 @@
+es:
+  tog_wall:
+    cancel: Cancelar
+    model:
+      graffity:
+        comment:
+          label: Comentario
+          textarea: ¿Qué estas pensando?
+      reply:
+        comment:
+          label: Comment
+          textarea: Escribe tu comentario...
+    views:
+      walls:
+        show:
+          graffities:
+            not_found: No hay grafitis en este muro
+      site:
+        comment:
+          to_comment: Comentar
+      member:
+        graffities:
+          form:
+            share_graffity: Compartir
+        replys:
+          form:
+            share_reply: Compartir

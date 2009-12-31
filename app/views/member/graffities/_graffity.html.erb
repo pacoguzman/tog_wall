@@ -1,0 +1,23 @@
+<% writer = graffity.profile %>
+<div id="<%= dom_id(graffity) %>" class="graffity">
+  <div class="avatar-small float_left">
+    <%= link_to icon_for_profile(writer, 'small', :title => writer.full_name), profile_path(writer) %>
+  </div>
+  <div>
+    <div class="text">
+      <span><%= link_to writer.full_name, profile_path(writer), :title => writer.full_name %></span>
+      <span><%= h graffity.comment %></span>
+    </div>
+    <div class="more">
+      <span class="datetime"><%= graffity_created_at_in_words(graffity.created_at) %></span>
+      <%= link_to I18n.t('tog_wall.views.site.comment.to_comment'), "#", :id => "reply-to-#{graffity.id}" if can?(:reply_at_wall, graffity.wall) %>
+    </div>  
+
+    <%#= collapse_replys(graffity, :id => "collapsed_#{graffity.id}") %>
+    <%= render :partial => "member/graffities/reply", :collection => graffity.replys, :locals=>{:graffity=>graffity} %>
+    <%= render :partial => "member/graffities/reply_form", :locals=>{:instance => graffity,
+                                                      :url=>reply_member_profile_wall_graffity_path(current_user.profile,graffity),
+                                                      :form_element=>:comment,
+                                                      :label=>I18n.t('general.post_comment')} if can?(:reply_at_wall, graffity.wall) %>
+  </div>
+</div>

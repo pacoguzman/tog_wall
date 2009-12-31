@@ -1,0 +1,55 @@
+<% include_stylesheet "/tog_wall/stylesheets/personalization.css" %>
+<% include_javascript "/tog_wall/javascripts/lowpro.js" %>
+<% include_javascript "/tog_wall/javascripts/wall.js" %>
+
+<% if can?(:comment_at_wall, @wall) %>
+    <%= render "member/graffities/form" %>
+<% elsif !logged_in? %>
+    <%= "Debes iniciar sesión y ser amigo de %{name} para poder escribir comentarios en su muro" % {:name => @owner.profile.full_name} %>
+<% else %>
+    <%= "Debes ser amigo de %{name} para poder escribir comentarios en su muro" % {:name => @owner.profile.full_name} %>
+<% end %>
+
+<div id="graffities" class="portlet portletJ">
+  <% if @graffities.blank? %>
+      <%= I18n.t('tog_wall.views.walls.show.graffities.not_found') %>
+  <% else %>
+      <%= render :partial => "member/graffities/graffity", :collection => @graffities %>
+  <% end -%>
+</div>
+
+<%= will_paginate @graffities, :renderer => FlowPagination::LinkRenderer %>
+
+
+<script language="JavaScript" type="text/javascript">
+    //<![CDATA[
+    $("graffity_comment").defaultValueActsAsHint();
+    $("graffity_form").down("input[type=submit]").disable();
+    // Need text different from default
+    Event.addBehavior({
+        '#graffity_comment' : Observed(function(el, value) {
+            if (el.value.strip() != "" && el.value.strip() != el._default) el.up("form").down("input[type=submit]").enable();
+            else el.up("form").down("input[type=submit]").disable();
+        }, {frequency : 0.5})
+    });
+
+    // Respuestas
+    $$("textarea.reply").each(function(el) {
+        el.actsAsReplyTextarea();
+    });
+    $$("form.reply").each(function(el){
+       el.down("input[type=submit]").disable(); 
+    });
+    // Need text different from default
+    Event.addBehavior({
+        'textarea.reply' : Observed(function(el, value) {
+            if (el.value.strip() != "" && el.value.strip() != el._default) el.up("form").down("input[type=submit]").enable();
+            else el.up("form").down("input[type=submit]").disable();
+        }, {frequency : 0.5})
+    });
+
+    <% loading_text = I18n.t("flow_pagination.loading") %>
+    window.spinner = '<span class="prepend-1 loading"><%= icon_loading_flow_pagination(:alt => loading_text, :title => loading_text )%></span>';
+    
+    //]]>
+</script>

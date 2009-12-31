@@ -1,0 +1,12 @@
+pt-BR:
+  tog_wall:
+    model:
+      graffity:
+        comment:
+          label: Comment
+          textarea: What's on your mind?
+    views:
+      member:
+        graffities:
+          form:
+            share_graffity: Share   
