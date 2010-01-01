@@ -1,7 +1,7 @@
 class Member::GraffitiesController < Member::BaseController
 
   before_filter :load_wall
-  before_filter :load_graffity_to_reply, :only => [:reply]
+  before_filter :load_graffity, :only => [:reply, :like]
 
   def create
     @graffity = Graffity.build_from(@wall, current_user.profile, params[:graffity], :request => request)
@@ -26,7 +26,7 @@ class Member::GraffitiesController < Member::BaseController
     @reply = Graffity.build_from(@wall, current_user.profile, params[:graffity], :request => request)
 
     respond_to do |format|
-      if @graffity.wall_id == @wall.id && can?(:reply_at_wall,@wall) && @reply.save && @reply.move_to_child_of(@graffity)
+      if can?(:reply_at_wall, @wall) && @reply.save && @reply.move_to_child_of(@graffity)
         if @reply.approved
           flash[:ok] = I18n.t("tog_core.site.comment.added")
         else
@@ -37,6 +37,20 @@ class Member::GraffitiesController < Member::BaseController
       end
       format.html { redirect_to request.referer }
       #format.js { render :reply; flash.discard }
+    end
+  end
+
+  def like
+    @like = Graffity.build_like(@wall, current_user.profile, :request => request)
+
+    respond_to do |format|
+      if can?(:like_graffity, @graffity) && @like.save && @like.move_to_child_of(@graffity)
+        flash[:ok] = I18n.t("tog_core.site.comment.added") # "like added"
+      else
+        flash[:error] = I18n.t("tog_core.site.comment.error_commenting") # "like error"
+      end
+      format.html { redirect_to request.referer }
+      #format.js { render :like; flash.discard }
     end
   end
 
@@ -54,8 +68,8 @@ private
     @wall = @owner.wall
   end
 
-  def load_graffity_to_reply
-    @graffity = Graffity.find(params[:id])
+  def load_graffity
+    @graffity = @wall.graffities.find(params[:id])
   end
 
 end

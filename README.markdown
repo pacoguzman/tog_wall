@@ -8,6 +8,7 @@ Included functionality
 
 * Comment in a wall
 * Reply comments in a wall
+* Like comments
 
 Resources
 =========
@@ -38,7 +39,7 @@ ruby script/generate migration install_tog_wall
 <pre>
 class InstallTogWall < ActiveRecord::Migration
   def self.up
-    migrate_plugin "tog_wall", 2
+    migrate_plugin "tog_wall", 3
   end
 
   def self.down
