@@ -14,14 +14,18 @@ en:
       walls:
         show:
           graffities:
-            not_found: There are not graffities in this wall
+            not_found: There are not graffities in this wall  
       site:
         comment:
-          to_comment: Comment                    
+          to_comment: Comment
+          to_like : Like
       member:
         graffities:
           form:
             share_graffity: Share
         replys:
           form:
-            share_reply: Share            
+            share_reply: Share
+        like_resume:
+          one: "{{name}} likes this"
+          other: "{{noun}} people like this"                                          

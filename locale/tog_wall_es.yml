@@ -14,10 +14,11 @@ es:
       walls:
         show:
           graffities:
-            not_found: No hay grafitis en este muro
+            not_found: No hay grafitis en este muro  
       site:
         comment:
           to_comment: Comentar
+          to_like : Me gusta
       member:
         graffities:
           form:
@@ -25,3 +26,6 @@ es:
         replys:
           form:
             share_reply: Compartir
+        like_resume:
+          one: "{{name}} le gusta"
+          other: "A {{noun}} personas les gusta"             

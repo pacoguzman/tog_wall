@@ -11,7 +11,10 @@
     <div class="more">
       <span class="datetime"><%= graffity_created_at_in_words(graffity.created_at) %></span>
       <%= link_to I18n.t('tog_wall.views.site.comment.to_comment'), "#", :id => "reply-to-#{graffity.id}" if can?(:reply_at_wall, graffity.wall) %>
-    </div>  
+      <%= link_to I18n.t('tog_wall.views.site.comment.to_like'), like_member_profile_wall_graffity_path(writer, graffity), :id => "like-to-#{graffity.id}", :class => "like" if can?(:like_graffity, graffity) %>
+    </div>
+
+    <%= render :partial => "member/graffities/like_resume", :locals => {:likes => graffity.likes, :graffity => graffity} unless graffity.likes.empty? %>
 
     <%#= collapse_replys(graffity, :id => "collapsed_#{graffity.id}") %>
     <%= render :partial => "member/graffities/reply", :collection => graffity.replys, :locals=>{:graffity=>graffity} %>

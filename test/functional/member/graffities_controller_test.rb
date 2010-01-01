@@ -75,14 +75,14 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
     end
 
     
-    context "ON POST :like" do
+    context "ON GET :like" do
       setup do
         @graffity = Factory(:graffity, :wall => @owner.wall, :profile => @owner)
       end
 
       context "with correct params" do
         setup do
-          post :like, {:profile_id => @owner.id, :id => @graffity.id}
+          get :like, {:profile_id => @owner.id, :id => @graffity.id}
         end
 
         should "not create a like" do
@@ -162,14 +162,14 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
       end
     end
 
-    context "ON POST :like" do
+    context "ON GET :like" do
       setup do
         @graffity = Factory(:graffity, :wall => @owner.wall, :profile => @owner)
       end
 
       context "with valid params" do
         setup do
-          post :like, {:profile_id => @owner.id, :id => @graffity.id}
+          get :like, {:profile_id => @owner.id, :id => @graffity.id}
         end
 
         should "create a like" do

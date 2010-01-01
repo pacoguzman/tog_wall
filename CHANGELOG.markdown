@@ -1,6 +1,6 @@
 EDGE
 ----
-* Added like comments functionality not views yet
+* Added like comments functionality
 
 0.1.0
 ----
