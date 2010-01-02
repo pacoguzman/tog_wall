@@ -16,7 +16,7 @@
                 element.addClassName('hint').value = element._default;
             }).addClassName('hint');
         },
-        
+
         actsAsReplyTextarea: function(element, options) {
             element = $(element);
 
@@ -63,6 +63,69 @@
         Element.addMethods(tag, methods)
     });
 })();
+
+if (window.Widget == undefined) window.Widget = {};
+
+// For collapsing some replys to display later if the user wants
+Widget.Collapsable = Class.create({
+    initialize: function(comment, collapsed, options)
+    {
+        this.comment   = $(comment);
+        this.collapsed = $(collapsed);
+        this.options   = $H({
+            'collapse_since'  : 4, //4 children
+            'children_showed' : 2 //2 children showed always
+        }).update(options);
+
+        this.replys = this.comment.select("div[id^=reply]");
+        this.total_replys = this.replys.size();
+        if (this.collapsed)
+            this.collapsed.widget = this;
+        this.init_state();
+    },
+
+    init_state: function()
+    {
+        if (this.total_replys > this.options.get('collapse_since')){
+          this.collapse();
+          this.collapsed.show();
+        }
+        return true;
+    },
+
+    collapse: function()
+    {
+        // Se muestran solo los últimos children_showed, los primeros se ocultan
+        var hide_first = this.total_replys - this.options.get('children_showed');
+        this.replys.each(function(el,i){
+            if (i < hide_first) { el.hide(); };
+        });
+        return true;
+    },
+
+    uncollapse: function()
+    {
+        var hide_first = this.total_replys - this.options.get('children_showed');
+        this.replys.each(function(el,i){
+            if (i < hide_first) { el.show(); };
+        });
+        this.collapsed.hide(); // we can't use this.collapsed.addClassName("hide"); in IE6
+        return true;
+    }
+});
+
+CollapsableReplys = Behavior.create({
+    initialize : function(options) {
+        this.options = $H({
+            'selector_for_collapsed'  : "div[id^=collapsed]",
+            'collapse_since' : 4,
+            'children_showed': 2
+        }).update(options);
+        var collapsed = this.element.down(this.options.get('selector_for_collapsed'));
+        if (collapsed)
+          new Widget.Collapsable(this.element, collapsed, this.options);
+    }
+});
 
 Event.addBehavior({
     '#graffities:click' : Event.delegate({

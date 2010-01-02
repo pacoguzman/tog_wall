@@ -16,7 +16,7 @@
 
     <%= render :partial => "member/graffities/like_resume", :locals => {:likes => graffity.likes, :graffity => graffity} unless graffity.likes.empty? %>
 
-    <%#= collapse_replys(graffity, :id => "collapsed_#{graffity.id}") %>
+    <%= collapse_replys(graffity, :id => "collapsed_#{graffity.id}") %>
     <%= render :partial => "member/graffities/reply", :collection => graffity.replys, :locals=>{:graffity=>graffity} %>
     <%= render :partial => "member/graffities/reply_form", :locals=>{:instance => graffity,
                                                       :url=>reply_member_profile_wall_graffity_path(@owner, graffity),

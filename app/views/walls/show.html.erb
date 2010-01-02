@@ -39,12 +39,17 @@
             el.down("textarea.reply").actsAsReplyTextarea();
             el.down("input[type=submit]").disable();
         });
-        // Respuestas Need text different from default
+        // Replys need text different from default
         Event.addBehavior({
             'textarea.reply' : Observed(function(el, value) {
                 if (el.value.strip() != "" && el.value.strip() != el._default) el.up("form").down("input[type=submit]").enable();
                 else el.up("form").down("input[type=submit]").disable();
             }, {frequency : 0.5})
+        });
+
+        // Collapse replys
+        Event.addBehavior({
+            '#graffities > div.graffity' : CollapsableReplys(<%= options_for_collapse_to_js %>)//,
         });
 
         Event.addBehavior({

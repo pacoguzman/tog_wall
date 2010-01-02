@@ -9,6 +9,8 @@ Included functionality
 * Comment in a wall
 * Reply comments in a wall
 * Like comments
+* Flow pagination with will_paginate
+* Collapse replys
 
 Resources
 =========

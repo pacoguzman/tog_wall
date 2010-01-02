@@ -26,6 +26,7 @@ es:
         graffities:
           form:
             share_graffity: Compartir
+          see_collapsed_comments: Ver los {{count}} commentarios            
         replys:
           form:
             share_reply: Compartir
