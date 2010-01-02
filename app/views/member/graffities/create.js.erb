@@ -1,0 +1,13 @@
+$("graffity_form").down("textarea").clear();
+
+<% if @graffity.approved && !@graffity.new_record? %>
+<% escaped_js = escape_javascript(render(:partial => "member/graffities/graffity", :object => @graffity)) %>        
+  if ($("graffities").descendants().size() > 0)
+    $("graffities").insert({top: "<%= escaped_js %>"});
+  else
+    $("graffities").update("<%= escaped_js %>");
+
+  var form_reply = $("reply_form_to_<%= @graffity.id %>");
+  form_reply.down("textarea.reply").actsAsReplyTextarea();
+  form_reply.down("input[type=submit]").disable();
+<% end %>

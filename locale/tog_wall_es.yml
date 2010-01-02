@@ -14,7 +14,10 @@ es:
       walls:
         show:
           graffities:
-            not_found: No hay grafitis en este muro  
+            not_found: No hay grafitis en este muro
+          flow_pagination:
+            button: Conversaciones anteriores
+            loading: Cargando conversaciones anteriores...
       site:
         comment:
           to_comment: Comentar

@@ -19,7 +19,7 @@
     <%#= collapse_replys(graffity, :id => "collapsed_#{graffity.id}") %>
     <%= render :partial => "member/graffities/reply", :collection => graffity.replys, :locals=>{:graffity=>graffity} %>
     <%= render :partial => "member/graffities/reply_form", :locals=>{:instance => graffity,
-                                                      :url=>reply_member_profile_wall_graffity_path(current_user.profile,graffity),
+                                                      :url=>reply_member_profile_wall_graffity_path(@owner, graffity),
                                                       :form_element=>:comment,
                                                       :label=>I18n.t('general.post_comment')} if can?(:reply_at_wall, graffity.wall) %>
   </div>

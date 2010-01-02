@@ -85,3 +85,23 @@ Event.addBehavior({
 });
 
 Event.addBehavior.reassignAfterAjax = true;
+
+document.observe("dom:loaded", function() {
+    // I can't do it with low pro behaviors
+    //http://wiki.github.com/mislav/will_paginate/ajax-pagination
+    var body_container = $(document.body);
+    window.spinner = '<span class="prepend-1 loading"><img src="tog_wall/images/spinner.gif" alt="Loading..." title="Loading..." /></span>';
+
+    if (body_container) {
+        body_container.observe('click', function(e) {
+            var el = e.element();
+            if (el.match('div#flow_pagination a')) {
+                if (window.spinner) {
+                    el.up('#flow_pagination').insert({bottom : window.spinner});
+                }
+                new Ajax.Request(el.href, { method: 'get' });
+                e.stop();
+            }
+        })
+    }
+});

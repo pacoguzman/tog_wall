@@ -69,9 +69,8 @@ rake tog:plugins:test PLUGIN=tog_wall
 TODO
 -------
 
-* Use unobstrusive remote links
 * Show people like some graffity/comment
-* Add flow_pagination support
+* Add flow_pagination support using an actually flow_pagination instead will_paginate
 * Make possible to run the specs
 * Add examples of cucumber features with mundopepino or not
 * Better styling

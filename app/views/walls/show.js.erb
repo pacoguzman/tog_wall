@@ -1,0 +1,7 @@
+$("graffities").insert({bottom: "<%= escape_javascript(render :partial => "member/graffities/graffity", :collection => @graffities) %>"});
+$('flow_pagination').replace("<%= escape_javascript(will_paginate(@graffities, :renderer => FlowPagination::LinkRenderer)) %>")
+//TODO Reassign after ajax Lowpro doen's works
+$$("form.reply").each(function(el) {
+    el.down("textarea.reply").actsAsReplyTextarea();
+    el.down("input[type=submit]").disable();
+});

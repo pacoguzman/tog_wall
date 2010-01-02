@@ -14,7 +14,10 @@ en:
       walls:
         show:
           graffities:
-            not_found: There are not graffities in this wall  
+            not_found: There are not graffities in this wall
+          flow_pagination:
+            button: Next graffitiesConversaciones anteriores
+            loading: Loading next graffities...  
       site:
         comment:
           to_comment: Comment

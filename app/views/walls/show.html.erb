@@ -23,33 +23,37 @@
 
 <script language="JavaScript" type="text/javascript">
     //<![CDATA[
-    $("graffity_comment").defaultValueActsAsHint();
-    $("graffity_form").down("input[type=submit]").disable();
-    // Need text different from default
-    Event.addBehavior({
-        '#graffity_comment' : Observed(function(el, value) {
-            if (el.value.strip() != "" && el.value.strip() != el._default) el.up("form").down("input[type=submit]").enable();
-            else el.up("form").down("input[type=submit]").disable();
-        }, {frequency : 0.5})
-    });
+    Event.onReady(function(){ 
 
-    // Respuestas
-    $$("textarea.reply").each(function(el) {
-        el.actsAsReplyTextarea();
-    });
-    $$("form.reply").each(function(el){
-       el.down("input[type=submit]").disable(); 
-    });
-    // Need text different from default
-    Event.addBehavior({
-        'textarea.reply' : Observed(function(el, value) {
-            if (el.value.strip() != "" && el.value.strip() != el._default) el.up("form").down("input[type=submit]").enable();
-            else el.up("form").down("input[type=submit]").disable();
-        }, {frequency : 0.5})
-    });
+        $("graffity_comment").defaultValueActsAsHint();
+        $("graffity_form").down("input[type=submit]").disable();
+        // Need text different from default
+        Event.addBehavior({
+            '#graffity_comment' : Observed(function(el, value) {
+                if (el.value.strip() != "" && el.value.strip() != el._default) el.up("form").down("input[type=submit]").enable();
+                else el.up("form").down("input[type=submit]").disable();
+            }, {frequency : 0.5})
+        });
 
-    <% loading_text = I18n.t("flow_pagination.loading") %>
-    window.spinner = '<span class="prepend-1 loading"><%= icon_loading_flow_pagination(:alt => loading_text, :title => loading_text )%></span>';
-    
+        $$("form.reply").each(function(el){
+            el.down("textarea.reply").actsAsReplyTextarea();
+            el.down("input[type=submit]").disable();
+        });
+        // Respuestas Need text different from default
+        Event.addBehavior({
+            'textarea.reply' : Observed(function(el, value) {
+                if (el.value.strip() != "" && el.value.strip() != el._default) el.up("form").down("input[type=submit]").enable();
+                else el.up("form").down("input[type=submit]").disable();
+            }, {frequency : 0.5})
+        });
+
+        Event.addBehavior({
+            "#graffity_form" : Remote.Form,
+            "form.reply" : Remote.Form
+        });
+
+        <% loading_text = I18n.t("tog_wall.views.wall.show.flow_pagination.loading") %>
+        window.spinner = '<span class="loading"><%= icon_loading_flow_pagination(:alt => loading_text, :title => loading_text )%></span>';
+    });// onReady
     //]]>
 </script>

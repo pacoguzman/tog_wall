@@ -1,5 +1,5 @@
-<div id="div-reply-to-<%= instance.id %>" class="prepend-small">
-  <% form_for Graffity.new, :url => url, :html => {:id => "form-reply-to-#{instance.id}", :class => "reply"} do |f| %>
+<div id="reply_div_to_<%= instance.id %>" class="prepend-small">
+  <% form_for Graffity.new, :url => url, :html => {:id => "reply_form_to_#{instance.id}", :class => "reply"} do |f| %>
 
       <div class="float_left avatar-tiny">
         <%= link_to icon_for_profile(current_user.profile, 'tiny', :title => current_user.profile.full_name), profile_path(current_user.profile) %>

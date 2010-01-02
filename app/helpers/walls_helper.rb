@@ -29,4 +29,9 @@ module WallsHelper
       end
     end
   end
+
+  def icon_loading_flow_pagination(options={})
+    options.reverse_merge!(:alt => "Loading")
+    image_tag("/tog_wall/images/spinner.gif", options)
+  end
 end

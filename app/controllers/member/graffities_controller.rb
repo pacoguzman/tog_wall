@@ -17,7 +17,7 @@ class Member::GraffitiesController < Member::BaseController
         flash[:error] = I18n.t("tog_core.site.comment.error_commenting")
       end
       format.html { redirect_to request.referer }
-      #format.js { render :create; flash.discard }
+      format.js { render :create; flash.discard }
     end
   end
 
@@ -36,7 +36,7 @@ class Member::GraffitiesController < Member::BaseController
         flash[:error] = I18n.t("tog_core.site.comment.error_commenting")
       end
       format.html { redirect_to request.referer }
-      #format.js { render :reply; flash.discard }
+      format.js { render :reply; flash.discard }
     end
   end
 
