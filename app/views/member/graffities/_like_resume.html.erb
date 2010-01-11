@@ -5,7 +5,11 @@
   <div>
     <div class="text">
       <span>
-        <%= I18n.t("tog_wall.views.member.like_resume", :count => likes.size, :noun => likes.count, :name => link_to(likes.first.profile.full_name, profile_path(likes.first.profile), :title => likes.first.profile.full_name)) %>
+        <%= I18n.t("tog_wall.views.member.like_resume",
+                   :count => likes.size, 
+                   :noun => likes.size,
+                   :name => link_to(likes.first.profile.full_name, profile_path(likes.first.profile),
+                                    :title => likes.first.profile.full_name)) %>
       </span>
     </div>
   </div>

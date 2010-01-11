@@ -54,7 +54,8 @@
 
         Event.addBehavior({
             "#graffity_form" : Remote.Form,
-            "form.reply" : Remote.Form
+            "form.reply" : Remote.Form,
+            "a.like" : Remote.Link
         });
 
         <% loading_text = I18n.t("tog_wall.views.wall.show.flow_pagination.loading") %>

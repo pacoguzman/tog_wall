@@ -50,7 +50,7 @@ class Member::GraffitiesController < Member::BaseController
         flash[:error] = I18n.t("tog_core.site.comment.error_commenting") # "like error"
       end
       format.html { redirect_to request.referer }
-      #format.js { render :like; flash.discard }
+      format.js { render :like; flash.discard }
     end
   end
 

@@ -1,0 +1,8 @@
+<% if !@like.new_record? %>
+   $("<%= "like-to-#{@graffity.id}" %>").remove();     
+    <% escaped_js = escape_javascript(render("like_resume", :graffity => @graffity, :likes => @graffity.likes)) %>
+   if ($("<%= "like_resume_#{@graffity.id}" %>"))
+    $("<%= "like_resume_#{@graffity.id}" %>").update("<%= escaped_js %>");
+  else
+    $("<%= dom_id(@graffity) %>").down("div.more").insert({after: "<%= escaped_js %>"});
+<% end %>        
