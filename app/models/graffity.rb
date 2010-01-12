@@ -10,6 +10,8 @@ class Graffity < ActiveRecord::Base
   named_scope :type_likes, {:conditions => {:type_common => false}}
 
   validates_presence_of :comment, :if => :is_common_graffity?
+  validates_presence_of :wall
+  validates_presence_of :profile
 
   unless Tog::Plugins.settings(:tog_conversatio, 'search.skip_indices')
     define_index do

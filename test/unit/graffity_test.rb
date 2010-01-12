@@ -14,6 +14,9 @@ class GraffityTest < ActiveSupport::TestCase
     should_have_many :likes
     should_have_named_scope :type_likes
 
+    should_validate_presence_of :wall
+    should_validate_presence_of :profile
+
     context "common comment" do
       should "not be valid without a comment" do
         graffity = Graffity.new(:wall => @owner.profile.wall, :profile => @member.profile)
