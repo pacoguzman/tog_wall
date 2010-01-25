@@ -1,13 +1,17 @@
 <% include_stylesheet "/tog_wall/stylesheets/personalization.css" %>
 <% include_javascript "/tog_wall/javascripts/lowpro.js" %>
-<% include_javascript "/tog_wall/javascripts/wall.js" %>
+<% include_javascript "/tog_wall/javascripts/jquery-1.4.min.js" %>
+<% include_javascript "/tog_wall/javascripts/jquery.noconflict.js" %>
+<% include_javascript "/tog_wall/javascripts/jquery.form.js" %>
+<% include_javascript "/tog_wall/javascripts/jquery.wall.js" %>
+<% include_javascript "/tog_wall/javascripts/jquery.placeholder.js" %>
 
 <% if can?(:comment_at_wall, @wall) %>
     <%= render "member/graffities/form" %>
 <% elsif !logged_in? %>
-    <%= "Debes iniciar sesión y ser amigo de %{name} para poder escribir comentarios en su muro" % {:name => @owner.full_name} %>
+    <%= "Debes iniciar sesión y ser amigo de #{@owner.full_name} para poder escribir comentarios en su muro" %>
 <% else %>
-    <%= "Debes ser amigo de %{name} para poder escribir comentarios en su muro" % {:name => @owner.full_name} %>
+    <%= "Debes ser amigo de #{@owner.full_name} para poder escribir comentarios en su muro" %>
 <% end %>
 
 <div id="graffities" class="portlet portletJ">
@@ -20,46 +24,14 @@
 
 <%= will_paginate @graffities, :renderer => FlowPagination::LinkRenderer %>
 
-
 <script language="JavaScript" type="text/javascript">
-    //<![CDATA[
-    Event.onReady(function(){ 
-
-        $("graffity_comment").defaultValueActsAsHint();
-        $("graffity_form").down("input[type=submit]").disable();
-        // Need text different from default
+    //<![CDATA
+    document.observe("dom:loaded", function() {
+        alert('dom:loaded');
+        // Comportaminentos javascript para las respuestas
         Event.addBehavior({
-            '#graffity_comment' : Observed(function(el, value) {
-                if (el.value.strip() != "" && el.value.strip() != el._default) el.up("form").down("input[type=submit]").enable();
-                else el.up("form").down("input[type=submit]").disable();
-            }, {frequency : 0.5})
+            '#graffities > div[id^=graffity_]' : CollapsableReplys(<%= options_for_collapse_to_js %>)
         });
-
-        $$("form.reply").each(function(el){
-            el.down("textarea.reply").actsAsReplyTextarea();
-            el.down("input[type=submit]").disable();
-        });
-        // Replys need text different from default
-        Event.addBehavior({
-            'textarea.reply' : Observed(function(el, value) {
-                if (el.value.strip() != "" && el.value.strip() != el._default) el.up("form").down("input[type=submit]").enable();
-                else el.up("form").down("input[type=submit]").disable();
-            }, {frequency : 0.5})
-        });
-
-        // Collapse replys
-        Event.addBehavior({
-            '#graffities > div.graffity' : CollapsableReplys(<%= options_for_collapse_to_js %>)//,
-        });
-
-        Event.addBehavior({
-            "#graffity_form" : Remote.Form,
-            "form.reply" : Remote.Form,
-            "a.like" : Remote.Link
-        });
-
-        <% loading_text = I18n.t("tog_wall.views.wall.show.flow_pagination.loading") %>
-        window.spinner = '<span class="loading"><%= icon_loading_flow_pagination(:alt => loading_text, :title => loading_text )%></span>';
-    });// onReady
+    });
     //]]>
 </script>
