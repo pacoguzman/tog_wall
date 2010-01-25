@@ -1,0 +1,6 @@
+pt-BR:
+  time:
+    formats:
+      yesterday: "%H:%M"
+      week: "%a at %H:%M"
+      complete: "%B %d at %H:%M"

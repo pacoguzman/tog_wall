@@ -1,0 +1,6 @@
+es:
+  time:
+    formats:
+      yesterday: "%H:%M"
+      week: "%a a las %H:%M"
+      complete: "%e de %B a las %H:%M"
