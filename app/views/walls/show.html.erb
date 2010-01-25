@@ -5,9 +5,9 @@
 <% if can?(:comment_at_wall, @wall) %>
     <%= render "member/graffities/form" %>
 <% elsif !logged_in? %>
-    <%= "Debes iniciar sesión y ser amigo de %{name} para poder escribir comentarios en su muro" % {:name => @owner.profile.full_name} %>
+    <%= "Debes iniciar sesión y ser amigo de %{name} para poder escribir comentarios en su muro" % {:name => @owner.full_name} %>
 <% else %>
-    <%= "Debes ser amigo de %{name} para poder escribir comentarios en su muro" % {:name => @owner.profile.full_name} %>
+    <%= "Debes ser amigo de %{name} para poder escribir comentarios en su muro" % {:name => @owner.full_name} %>
 <% end %>
 
 <div id="graffities" class="portlet portletJ">

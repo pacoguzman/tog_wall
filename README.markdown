@@ -77,6 +77,8 @@ TODO
 * Add examples of cucumber features with mundopepino or not
 * Better styling
 * Version using jQuery instead Prototype for the javascript behaviour
+* Create an wall-to-wall with other user as facebook does
+* In your wall (friends + you or friends or you)
 
 
 More

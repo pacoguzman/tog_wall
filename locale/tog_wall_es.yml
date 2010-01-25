@@ -1,4 +1,8 @@
 es:
+  wall:
+    datetimes:
+      articulo_el: 'El '
+      yesterday_at: 'Ayer a las '
   tog_wall:
     cancel: Cancelar
     model:

@@ -2,8 +2,9 @@
     <fieldset>
       <div class="fields">
         <%= f.label :comment, I18n.t("tog_wall.model.graffity.comment.label"), :class => "hide" %>
-        <%= f.text_area :comment, {:value => I18n.t("tog_wall.model.graffity.comment.textarea"),
-                                   :rows=>3, :cols=>40, :class=>"hint"} -%>
+        <%= f.text_area :comment, {:placeholder => I18n.t("tog_wall.model.graffity.comment.textarea"),
+                                   :value => I18n.t("tog_wall.model.graffity.comment.textarea"), 
+                                   :rows=>3, :cols=>40, :class=>"placeholder"} -%>
       </div>
     </fieldset>
 

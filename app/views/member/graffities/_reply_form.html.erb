@@ -8,7 +8,8 @@
         <div class="fields">
           <%= f.label "comment_#{instance.id}", I18n.t("tog_wall.model.reply.comment.label"), :class => "hide" %>
           <%= f.text_area :comment, {:value => I18n.t("tog_wall.model.reply.comment.textarea"),
-                                     :id => "graffity_comment_#{instance.id}", :rows=>2, :cols=>35, :class=>"reply hint"} -%>
+                                     :placeholder => I18n.t("tog_wall.model.reply.comment.textarea"),
+                                     :id => "graffity_comment_#{instance.id}", :rows=>2, :cols=>35, :class=>"reply placeholder"} -%>
         </div>
       </fieldset>
 

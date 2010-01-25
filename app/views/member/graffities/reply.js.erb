@@ -1,6 +1,4 @@
-$("<%= "reply_form_to_#{@graffity.id}" %>").down("textarea").clear();
-
 <% if @reply.approved && !@reply.new_record? %>
     <% escaped_js = escape_javascript(render(:partial => "member/graffities/reply", :object => @reply)) %>
-    $("<%= "reply_div_to_#{@graffity.id}" %>").insert({before: "<%= escaped_js %>"});
+    jQuery("#<%= "reply_div_to_#{@graffity.id}" %>").before("<%= escaped_js %>");
 <% end %>
