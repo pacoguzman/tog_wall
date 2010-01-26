@@ -27,7 +27,6 @@
 <script language="JavaScript" type="text/javascript">
     //<![CDATA
     document.observe("dom:loaded", function() {
-        alert('dom:loaded');
         // Comportaminentos javascript para las respuestas
         Event.addBehavior({
             '#graffities > div[id^=graffity_]' : CollapsableReplys(<%= options_for_collapse_to_js %>)
