@@ -10,7 +10,7 @@ end
 Tog::Plugins.settings :tog_wall,  'wall.pagination_size' => 10
 Tog::Plugins.settings :tog_wall,  'search.skip_indices' => false
 
-Tog::Plugins.helpers WallsHelper
+Tog::Plugins.helpers WallsHelper, GraffitiesHelper
 
 Tog::Search.sources << "Graffity"
 

@@ -1,0 +1,12 @@
+jQuery("#graffity_paginate_link").remove();
+jQuery("#graffity_paginate_loading").remove();
+
+<% if @graffities.any? %>
+  jQuery("#graffities").append("<%= escape_javascript(render :partial => "member/graffities/graffity", :collection => @graffities) %>")
+  jQuery("textarea.reply", jQuery("#graffities")).filter(function(){
+      return !(!!jQuery(this).data('events'));
+  }).placeholder();      
+  <% if @graffities.size == Tog::Config['plugins.tog_wall.wall.pagination_size'] %>
+    jQuery("#graffities").append("<%= show_more_button(@graffities) %>")
+  <% end -%>
+<% end -%>

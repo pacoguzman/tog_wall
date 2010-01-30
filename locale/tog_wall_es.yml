@@ -19,7 +19,7 @@ es:
         show:
           graffities:
             not_found: No hay grafitis en este muro
-          flow_pagination:
+          show_more:
             button: Conversaciones anteriores
             loading: Cargando conversaciones anteriores...
           should_be_friend: "Debes ser amigo de {{name}} para poder escribir comentarios en su muro"

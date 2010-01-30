@@ -3,6 +3,11 @@ class Member::GraffitiesController < Member::BaseController
   before_filter :load_wall
   before_filter :load_graffity, :only => [:reply, :like]
 
+  def show_more
+    @graffities = Wall.get_graffities_for(@wall, :before => params[:id])
+    @last_graffity = @graffities.last
+  end
+
   def create
     @graffity = Graffity.build_from(@wall, current_user.profile, params[:graffity], :request => request)
 

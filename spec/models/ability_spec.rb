@@ -46,7 +46,7 @@ describe Ability do
       end
 
       describe "cannot like graffity" do
-        setup do
+        before(:each) do
           @graffity = Factory(:graffity, :wall => @owner.profile.wall, :profile => @owner.profile)
           @like = Graffity.build_like(@owner.profile.wall, @owner.profile)
           @like.save && @like.move_to_child_of(@graffity)
@@ -76,7 +76,7 @@ describe Ability do
       end
 
       describe "can like graffity" do
-        setup do
+        before(:each) do
           @graffity = Factory(:graffity, :wall => @owner.profile.wall, :profile => @owner.profile)
         end
 

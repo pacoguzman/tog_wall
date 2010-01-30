@@ -19,7 +19,7 @@ pt-BR:
         show:
           graffities:
             not_found: There are not graffities in this wall
-          flow_pagination:
+          show_more:
             button: Next graffities
             loading: Loading next graffities...
           should_be_friend: "Should be friend of {{name}} to be able to write down in the wall"
