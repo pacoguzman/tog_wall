@@ -123,6 +123,12 @@
            event.preventDefault();
            $(this).closest("div").get(0).widget.uncollapse(); 
         });
+
+        // Show more ajaxify link
+        $("#show_more_button a").live('click', function(event){
+           event.preventDefault();
+           $.get(this.href,{},function(){}, "script")
+        });
     });
 })(jQuery);
 
