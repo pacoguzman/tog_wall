@@ -69,12 +69,14 @@ class Member::GraffitiesController < Member::BaseController
 
 private
   def load_wall
-    @owner = Profile.active.find(params[:profile_id])
-    @wall = @owner.wall
+    @wall = Wall.find(params[:wall_id])
+    @owner = Profile.active.find(@wall.profile_id)
   end
 
   def load_graffity
-    @graffity = @wall.graffities.find(params[:id])
+    @graffity = Graffity.find(params[:id], :include => [:wall])
+    @wall = @graffity.wall
+    @owner = Profile.active.find(@wall.profile_id)
   end
 
 end
