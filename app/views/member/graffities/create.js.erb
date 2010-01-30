@@ -3,5 +3,8 @@
   if (jQuery("#graffities").children().length > 0)
     jQuery("#graffities").prepend("<%= escaped_js %>");
   else
-    jQuery("#graffities")[0].innerHTML("<%= escaped_js %>");
+    jQuery("#graffities").replaceWith("<%= escaped_js %>");
+  jQuery("textarea.reply", jQuery("#graffities")).filter(function(){
+      return !(!!jQuery(this).data('events'));
+  }).placeholder();        
 <% end %>
