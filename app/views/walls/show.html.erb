@@ -9,9 +9,9 @@
 <% if can?(:comment_at_wall, @wall) %>
     <%= render "member/graffities/form" %>
 <% elsif !logged_in? %>
-    <%= "Debes iniciar sesión y ser amigo de #{@owner.full_name} para poder escribir comentarios en su muro" %>
+    <%= I18n.t("tog_wall.views.walls.show.should_be_logged_and_be_friend", :name => @owner.full_name) %>
 <% else %>
-    <%= "Debes ser amigo de #{@owner.full_name} para poder escribir comentarios en su muro" %>
+    <%= I18n.t("tog_wall.views.walls.show.should_be_friend", :name => @owner.full_name) %>
 <% end %>
 
 <div id="graffities" class="portlet portletJ">

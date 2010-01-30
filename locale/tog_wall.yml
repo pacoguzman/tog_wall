@@ -21,7 +21,9 @@ en:
             not_found: There are not graffities in this wall
           flow_pagination:
             button: Next graffitiesConversaciones anteriores
-            loading: Loading next graffities...  
+            loading: Loading next graffities...
+          should_be_friend: "Should be friend of {{name}} to be able to write down in the wall"
+          should_be_logged_and_be_friend: "Should be logged and be friend of {{name}} to be able to write in the wall"
       site:
         comment:
           to_comment: Comment

@@ -22,6 +22,8 @@ es:
           flow_pagination:
             button: Conversaciones anteriores
             loading: Cargando conversaciones anteriores...
+          should_be_friend: "Debes ser amigo de {{name}} para poder escribir comentarios en su muro"
+          should_be_logged_and_be_friend: "Debes iniciar sesión y ser amigo de {{name}} para poder escribir comentarios en su muro"            
       site:
         comment:
           to_comment: Comentar
