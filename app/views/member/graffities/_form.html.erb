@@ -1,4 +1,4 @@
-<% form_for :graffity, :url => member_profile_wall_graffities_path(@owner), :html => {:id=>'graffity_form'} do |f| -%>
+<% form_for :graffity, :url => member_wall_graffities_path(@owner.wall), :html => {:id=>'graffity_form'} do |f| -%>
     <fieldset>
       <div class="fields">
         <%= f.label :comment, I18n.t("tog_wall.model.graffity.comment.label"), :class => "hide" %>

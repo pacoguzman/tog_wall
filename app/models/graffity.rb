@@ -8,6 +8,12 @@ class Graffity < ActiveRecord::Base
   has_many :replys, :class_name => "Graffity", :foreign_key => "parent_id", :conditions => {:type_common => true}, :order => "created_at ASC"
   has_many :likes, :class_name => "Graffity", :foreign_key => "parent_id", :conditions => {:type_common => false}
   named_scope :type_likes, {:conditions => {:type_common => false}}
+  named_scope :in_walls, lambda {|*walls|
+    {:conditions => { :wall_id => Array(*walls).collect(&:id) }}
+  }
+  named_scope :in_profiles, lambda {|*profiles|
+    {:conditions => { :profile_id => Array(*profiles).collect(&:id) }}
+  }
 
   validates_presence_of :comment, :if => :is_common_graffity?
   validates_presence_of :wall

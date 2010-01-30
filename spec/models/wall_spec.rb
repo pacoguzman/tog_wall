@@ -67,5 +67,21 @@ describe Wall do
       Wall.get_graffities_for(@wall, :limit => 1)
     end
   end
+
+  context "#scoped_graffities_for" do
+    context "setting a id limit" do
+      it "should not set a limit" do
+        Wall.scoped_graffities_for([]).proxy_options.should == []
+      end
+
+      it "should set a lower limiit" do
+        Wall.scoped_graffities_for([], :after => 1).proxy_options.should == ["id > ?", 1]
+      end
+
+      it "should set a higher limit" do
+        Wall.scoped_graffities_for([], :before => 2).proxy_options.should == ["id < ?", 2]
+      end
+    end
+  end
     
 end

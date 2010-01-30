@@ -9,12 +9,12 @@
           <%= f.label "comment_#{instance.id}", I18n.t("tog_wall.model.reply.comment.label"), :class => "hide" %>
           <%= f.text_area :comment, {:value => I18n.t("tog_wall.model.reply.comment.textarea"),
                                      :placeholder => I18n.t("tog_wall.model.reply.comment.textarea"),
-                                     :id => "graffity_comment_#{instance.id}", :rows=>2, :cols=>35, :class=>"reply placeholder"} -%>
+                                     :id => "graffity_comment_#{instance.id}", :rows => 2, :cols => 35, :class => "reply placeholder"} -%>
         </div>
       </fieldset>
 
       <div class="actions">
-        <%= text_field_tag "cancel", I18n.t('tog_wall.cancel'), {:type => "button", :id => "cancel_#{instance.id}",:class => "button cancel", :accesskey => "c"} %>
+        <%= text_field_tag "cancel", I18n.t('tog_wall.cancel'), {:type => "button", :id => "cancel_#{instance.id}", :class => "button cancel", :accesskey => "c"} %>
         <%= submit_tag I18n.t('tog_wall.views.member.replys.form.share_reply'), {:class => "button mainaction", :accesskey => "s"} %>
       </div>
   <% end %>

@@ -8,7 +8,6 @@ class WallsController < ApplicationController
 
     @graffities = Wall.get_graffities_for(@wall)
     @last_graffity = @graffities.last
-
   end
 
 end

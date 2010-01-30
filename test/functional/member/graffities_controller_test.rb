@@ -5,12 +5,12 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
   context "A anonymous user" do
     should "denies access to create action" do
       @controller.expects(:create).never
-      post :create
+      post :create, {:wall_id => 1}
     end
 
     should "denies access to reply action" do
       @controller.expects(:reply).never
-      post :reply
+      post :reply, {:wall_id => 1}
     end
   end
 
@@ -24,7 +24,7 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
 
     context "on POST to :create" do
       setup do
-        post :create, {:profile_id => @owner.id, :graffity => Factory.attributes_for(:graffity)}
+        post :create, {:wall_id => @owner.wall.id, :graffity => Factory.attributes_for(:graffity)}
       end
 
       should "not create a graffity" do
@@ -44,10 +44,8 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
 
       context "trying to write a graffity in other wall" do
         setup do
-          post :reply, {:profile_id => @suplanted_owner.id, :id => @graffity.id, :graffity => Factory.attributes_for(:graffity)}
+          post :reply, {:id => @graffity.id, :graffity => Factory.attributes_for(:graffity)}
         end
-
-        should_render_template("member/site/not_found")
 
         should "not create any graffity in the owner wall" do
           assert_equal 1, @owner.wall.graffities.size
@@ -60,7 +58,7 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
 
       context "with correct params" do
         setup do
-          post :reply, {:profile_id => @owner.id, :id => @graffity.id, :graffity => Factory.attributes_for(:graffity)}
+          post :reply, {:id => @graffity.id, :graffity => Factory.attributes_for(:graffity)}
         end
 
         should "not create a reply" do
@@ -74,7 +72,6 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
       end
     end
 
-    
     context "ON GET :like" do
       setup do
         @graffity = Factory(:graffity, :wall => @owner.wall, :profile => @owner)
@@ -82,7 +79,7 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
 
       context "with correct params" do
         setup do
-          get :like, {:profile_id => @owner.id, :id => @graffity.id}
+          get :like, {:id => @graffity.id}
         end
 
         should "not create a like" do
@@ -113,7 +110,7 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
 
       context "with valid graffity params" do
         setup do
-          post :create, {:profile_id => @owner.id, :graffity => Factory.attributes_for(:graffity)}
+          post :create, {:wall_id => @owner.wall.id, :graffity => Factory.attributes_for(:graffity)}
         end
 
         should "create a graffity in the owner wall" do
@@ -128,7 +125,7 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
 
       context "without comment" do
         setup do
-          post :create, {:profile_id => @owner.id, :graffity => {}}
+          post :create, {:wall_id => @owner.wall.id, :graffity => {}}
         end
 
         should "not create a graffity" do
@@ -148,7 +145,7 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
 
       context "with valid reply params" do
         setup do
-          post :reply, {:profile_id => @owner.id, :id => @graffity.id, :graffity => Factory.attributes_for(:graffity)}
+          post :reply, {:id => @graffity.id, :graffity => Factory.attributes_for(:graffity)}
         end
 
         should "create a reply" do
@@ -169,7 +166,7 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
 
       context "with valid params" do
         setup do
-          get :like, {:profile_id => @owner.id, :id => @graffity.id}
+          get :like, {:id => @graffity.id}
         end
 
         should "create a like" do

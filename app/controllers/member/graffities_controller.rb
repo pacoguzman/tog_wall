@@ -1,7 +1,7 @@
 class Member::GraffitiesController < Member::BaseController
 
-  before_filter :load_wall
-  before_filter :load_graffity, :only => [:reply, :like]
+  before_filter :load_wall, :only => [:show_more, :create]
+  before_filter :load_graffity, :only => [:reply, :like, :update, :destroy]
 
   def show_more
     @graffities = Wall.get_graffities_for(@wall, :before => params[:id])
