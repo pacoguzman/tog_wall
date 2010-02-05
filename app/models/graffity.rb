@@ -34,17 +34,17 @@ class Graffity < ActiveRecord::Base
   end
 
   def self.build_from(wall, profile, graffity, params = {})
-    c = self.new
-    c.wall = wall
-    c.profile = profile
-    c.title = graffity[:title]
-    c.comment = graffity[:comment]
-    c.type_common = graffity[:type_common].nil? ? true : graffity[:type_common]
+    g = self.new
+    g.wall = wall
+    g.profile = profile
+    g.title = graffity[:title]
+    g.comment = graffity[:comment]
+    g.type_common = graffity[:type_common].nil? ? true : graffity[:type_common]
 
-    c.approved = !wall.respond_to?("moderated") || !wall.moderated || wall.profile_id = profile_id
-    c.spam = Cerberus.check_spam(c, params[:request])
+    g.approved = !wall.respond_to?("moderated") || !wall.moderated || wall.profile_id == profile_id
+    g.spam = Cerberus.check_spam(g, params[:request])
 
-    c
+    g
   end
 
   def self.build_like(wall, profile, params = {})

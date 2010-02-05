@@ -5,6 +5,7 @@ class Wall < ActiveRecord::Base
 
   def self.get_graffities_for(walls, *args)
     options = args.extract_options!
+    
     scoped_graffities_for(walls, options).
             all(:order => 'id DESC',
                 :limit => options[:limit] || Tog::Config['plugins.tog_wall.wall.pagination_size'])
@@ -12,6 +13,7 @@ class Wall < ActiveRecord::Base
 
   def self.get_walltowall_graffities_for(profiles, *args)
     options = args.extract_options!
+
     walls = Array(profiles).collect(&:wall)
     scoped_graffities_for(walls, options).
             in_profiles(profiles).

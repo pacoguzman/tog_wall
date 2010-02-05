@@ -22,6 +22,11 @@ class AbilityTest < ActiveSupport::TestCase
         @graffity = Factory(:graffity, :wall => @owner.profile.wall, :profile => @owner.profile)
         assert @ability.cannot?(:like_graffity, @graffity)
       end
+
+      should "cannot see walltowall" do
+        @graffity = Factory(:graffity, :wall => @owner.profile.wall, :profile => @owner.profile)
+        assert @ability.cannot?(:see_walltowall, @graffity)
+      end
     end
 
     context "owner" do

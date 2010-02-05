@@ -10,5 +10,11 @@ class Ability
       owner = graffity.wall.profile
       graffity && user && (user.profile == owner || user.profile.is_friend_of?(owner)) && !graffity.liked_by?(user.profile)
     end
+
+    can([:see_walltowall], Graffity) do |graffity|
+      owner = graffity.wall.profile
+      writer = graffity.profile
+      graffity && user && user.profile.is_friend_of?(owner) && user.profile.is_friend_of?(writer)
+    end
   end
 end
