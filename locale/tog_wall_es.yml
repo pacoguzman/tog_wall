@@ -33,7 +33,7 @@ es:
           form:
             share_graffity: Compartir
           see_collapsed_comments: Ver los {{count}} commentarios            
-        replys:
+        replies:
           form:
             share_reply: Compartir
         like_resume:

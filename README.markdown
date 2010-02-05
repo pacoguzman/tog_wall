@@ -10,7 +10,7 @@ Included functionality
 * Reply comments in a wall
 * Like comments
 * Flow pagination
-* Collapse replys
+* Collapse replies
 
 Resources
 =========

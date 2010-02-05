@@ -21,11 +21,11 @@ module WallsHelper
     options_for_javascript(options_for_collapse)
   end
 
-  def collapse_replys(graffity, options = {})
+  def collapse_replies(graffity, options = {})
     options.reverse_merge!(options_for_collapse)
     content_tag :div, nil, :id => options[:id], :style => "display:none;" do
-      link_to I18n.t("tog_wall.views.member.graffities.see_collapsed_comments", :count => graffity.replys.size)
-    end if graffity.replys.size > options[:children_showed]
+      link_to I18n.t("tog_wall.views.member.graffities.see_collapsed_comments", :count => graffity.replies.size)
+    end if graffity.replies.size > options[:children_showed]
   end
 
   def icon_loading_flow_pagination(options={})

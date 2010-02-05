@@ -33,7 +33,7 @@ pt-BR:
           form:
             share_graffity: Share
           see_collapsed_comments: See {{count}} comments
-        replys:
+        replies:
           form:
             share_reply: Share
         like_resume:

@@ -4,7 +4,7 @@ describe Graffity do
 
 #  it { should belong_to(:wall) }
 #  it { should belong_to(:profile) }
-#  it { should have_many(:replys) }
+#  it { should have_many(:replies) }
 
   it "is not valid without a comment" do
     @owner = Factory(:member, :login => "ownerious")

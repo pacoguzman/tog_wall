@@ -77,8 +77,8 @@ Widget.Collapsable = Class.create({
             'children_showed' : 2 //2 children showed always
         }).update(options);
 
-        this.replys = this.comment.select("div[id^=reply]");
-        this.total_replys = this.replys.size();
+        this.replies = this.comment.select("div[id^=reply]");
+        this.total_replies = this.replies.size();
         if (this.collapsed)
             this.collapsed.widget = this;
         this.init_state();
@@ -86,7 +86,7 @@ Widget.Collapsable = Class.create({
 
     init_state: function()
     {
-        if (this.total_replys > this.options.get('collapse_since')){
+        if (this.total_replies > this.options.get('collapse_since')){
           this.collapse();
           this.collapsed.show();
         }
@@ -96,8 +96,8 @@ Widget.Collapsable = Class.create({
     collapse: function()
     {
         // Se muestran solo los últimos children_showed, los primeros se ocultan
-        var hide_first = this.total_replys - this.options.get('children_showed');
-        this.replys.each(function(el,i){
+        var hide_first = this.total_replies - this.options.get('children_showed');
+        this.replies.each(function(el,i){
             if (i < hide_first) { el.hide(); };
         });
         return true;
@@ -105,8 +105,8 @@ Widget.Collapsable = Class.create({
 
     uncollapse: function()
     {
-        var hide_first = this.total_replys - this.options.get('children_showed');
-        this.replys.each(function(el,i){
+        var hide_first = this.total_replies - this.options.get('children_showed');
+        this.replies.each(function(el,i){
             if (i < hide_first) { el.show(); };
         });
         this.collapsed.hide(); // we can't use this.collapsed.addClassName("hide"); in IE6
@@ -114,7 +114,7 @@ Widget.Collapsable = Class.create({
     }
 });
 
-CollapsableReplys = Behavior.create({
+CollapsableReplies = Behavior.create({
     initialize : function(options) {
         this.options = $H({
             'selector_for_collapsed'  : "div[id^=collapsed]",

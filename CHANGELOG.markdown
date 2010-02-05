@@ -6,8 +6,8 @@ EDGE
 ----
 * Added like comments functionality
 * Added flow pagination
-* Graffities and replys through ajax
-* Collapse replys
+* Graffities and replies through ajax
+* Collapse replies
 * Using jQuery instead prototype
 
 0.1.0

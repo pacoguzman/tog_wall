@@ -6,8 +6,8 @@ class Member::WallsControllerTest < ActionController::TestCase
 
   context "The member walls controller" do
     setup do
-      @user = Factory(:member)
-      @owner = @user.profile
+      @member = Factory(:member)
+      @owner = @member.profile
       @wall = @owner.wall
       @graffities = @wall.graffities
       @request.session[:user_id] = @member.id

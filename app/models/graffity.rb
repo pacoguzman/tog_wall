@@ -5,7 +5,7 @@ class Graffity < ActiveRecord::Base
   belongs_to :wall
   belongs_to :profile
 
-  has_many :replys, :class_name => "Graffity", :foreign_key => "parent_id", :conditions => {:type_common => true}, :order => "created_at ASC"
+  has_many :replies, :class_name => "Graffity", :foreign_key => "parent_id", :conditions => {:type_common => true}, :order => "created_at ASC"
   has_many :likes, :class_name => "Graffity", :foreign_key => "parent_id", :conditions => {:type_common => false}
   named_scope :type_likes, {:conditions => {:type_common => false}}
   named_scope :in_walls, lambda {|*walls|

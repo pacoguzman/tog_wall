@@ -62,7 +62,7 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
         end
 
         should "not create a reply" do
-          assert @owner.wall.graffities.first.replys.empty?
+          assert @owner.wall.graffities.first.replies.empty?
         end
 
         should "set a error flash message" do
@@ -149,7 +149,7 @@ class Member::GraffitiesControllerTest < ActionController::TestCase
         end
 
         should "create a reply" do
-          assert_equal 1, @owner.wall.graffities.first.replys.size
+          assert_equal 1, @owner.wall.graffities.first.replies.size
         end
 
         should "set a ok flash message" do

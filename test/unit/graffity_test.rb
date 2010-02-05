@@ -9,7 +9,7 @@ class GraffityTest < ActiveSupport::TestCase
 
     should_belong_to :wall
     should_belong_to :profile
-    should_have_many :replys
+    should_have_many :replies
 
     should_have_many :likes
     should_have_named_scope :type_likes
