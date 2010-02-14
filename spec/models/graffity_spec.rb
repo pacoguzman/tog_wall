@@ -20,7 +20,7 @@ describe Graffity do
       @wall.stub(:profile)
     end
 
-    it "should return a graffity instance" do
+    it "should return a graffity" do
       Graffity.build_from(@wall, nil, {}).should be_instance_of(Graffity)
     end
 
@@ -55,7 +55,19 @@ describe Graffity do
       graffity.comment.should == "Bazzinga!"
     end
 
+  end
 
+  # Subject-ivity
+  describe "subject-ivity" do
+    subject { Graffity.new(:type_common => true) }
+    specify { subject.should be_common_graffity }
+    specify { subject.should_not be_like_graffity }
+  end
+
+  describe "implicit subject-ivity" do
+    subject { Graffity.new(:type_common => true) }
+    specify { should be_common_graffity }
+    specify { should_not be_like_graffity }
   end
 
 end

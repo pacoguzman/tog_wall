@@ -4,16 +4,13 @@ describe Member::WallsController do
 
   #should_route :get, "/member/wall", :controller => "member/walls", :action => "show"
 
-  before(:each) do
-    @member = Factory(:member)
-    @owner = @member.profile
-    @wall = @owner.wall
-    @graffities = @wall.graffities
-    @request.session[:user_id] = @member.id
-  end
-
   describe "show action" do
     before(:each) do
+      @member = Factory(:member)
+      @owner = @member.profile
+      @wall = @owner.wall
+      @graffities = @wall.graffities
+      @request.session[:user_id] = @member.id
       get :show
     end
 

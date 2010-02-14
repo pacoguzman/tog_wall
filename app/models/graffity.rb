@@ -15,7 +15,7 @@ class Graffity < ActiveRecord::Base
     {:conditions => { :profile_id => Array(*profiles).collect(&:id) }}
   }
 
-  validates_presence_of :comment, :if => :is_common_graffity?
+  validates_presence_of :comment, :if => :common_graffity?
   validates_presence_of :wall
   validates_presence_of :profile
 
@@ -51,11 +51,11 @@ class Graffity < ActiveRecord::Base
     self.build_from(wall, profile, {:type_common => false}, params)
   end
 
-  def is_common_graffity?
+  def common_graffity?
     type_common
   end
 
-  def is_like_graffity?
+  def like_graffity?
     !type_common
   end
 

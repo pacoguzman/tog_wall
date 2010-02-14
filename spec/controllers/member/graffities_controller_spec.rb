@@ -4,27 +4,27 @@ describe Member::GraffitiesController do
 
   context "A anonymous user" do
     it "denies access to create action" do
-      @controller.expects(:create).never
+      @controller.should_receive(:create).never
       post :create, {:wall_id => 1}
     end
 
     it "denies access to reply action" do
-      @controller.expects(:reply).never
+      @controller.should_receive(:reply).never
       post :reply, {:wall_id => 1}
     end
 
     it "denies access to like action" do
-      @controller.expects(:like).never
+      @controller.should_receive(:like).never
       post :like, {:wall_id => 1}
     end
 
     it "denies access to update action" do
-      @controller.expects(:update).never
+      @controller.should_receive(:update).never
       put :reply, {:wall_id => 1}
     end
     
     it "denies access to destroy action" do
-      @controller.expects(:destroy).never
+      @controller.should_receive(:destroy).never
       delete :reply, {:wall_id => 1}
     end
   end
@@ -33,8 +33,8 @@ describe Member::GraffitiesController do
     before(:each) do
       @member = Factory(:member).profile
       @owner = Factory(:member, :login => "Berlusconi").profile
-      @request.session[:user_id] = @member.id
-      @request.stubs(:referer => "/")
+      @request.session[:user_id] = @member.user.id
+      @request.stub(:referer => "/")
     end
 
     context "on POST to :create" do
@@ -57,7 +57,7 @@ describe Member::GraffitiesController do
         @suplanted_owner = Factory(:member, :login => "Merkel").profile
       end
 
-      context "trying to write a graffity in other wall" do
+      context "trying to write a reply in other wall" do
         before(:each) do
           post :reply, {:id => @graffity.id, :graffity => Factory.attributes_for(:graffity)}
         end
@@ -114,8 +114,8 @@ describe Member::GraffitiesController do
     before(:each) do
       @member = Factory(:member).profile
       @owner = Factory(:member, :login => "Berlusconi").profile
-      @request.session[:user_id] = @member.id
-      @request.stubs(:referer => "/")
+      @request.session[:user_id] = @member.user.id
+      @request.stub(:referer => "/")
 
       @owner.add_friend(@member)
     end

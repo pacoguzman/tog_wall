@@ -10,8 +10,9 @@
     </div>
     <div class="more">
       <span class="datetime"><%= graffity_created_at_in_words(graffity.created_at) %></span>
-      <%= link_to I18n.t('tog_wall.views.site.comment.to_comment'), "#", :id => "reply-to-#{graffity.id}" if can?(:reply_at_wall, graffity.wall) %>
-      <%= link_to I18n.t('tog_wall.views.site.comment.to_like'), like_member_graffity_path(graffity), :id => "like-to-#{graffity.id}", :class => "like" if can?(:like_graffity, graffity) %>
+      <%= graffity_link_to_comment(graffity) if can?(:reply_at_wall, graffity.wall) %>
+      <%= graffity_link_to_like(graffity) if can?(:like_graffity, graffity) %>
+      <%= graffity_link_to_walltowall(graffity) if can?(:see_walltowall, graffity) %>
     </div>
 
     <%= render :partial => "member/graffities/like_resume", :locals => {:likes => graffity.likes, :graffity => graffity} unless graffity.likes.empty? %>

@@ -4,7 +4,7 @@ describe Ability do
 
   describe "Wall abilities" do
     
-    describe "a user not logged in" do
+    context "a user not logged in" do
       before(:each) do
         @owner = Factory(:member, :login => "ownerious")
         @current_user = nil
@@ -30,7 +30,7 @@ describe Ability do
       end
     end
 
-    describe "a owner" do
+    context "a owner" do
       before(:each) do
         @owner = Factory(:member, :login => "ownerious")
         @current_user = @owner
@@ -63,9 +63,10 @@ describe Ability do
       end
     end
 
-    describe "a friend of the owner" do
+    context "a friend of the owner" do
       before(:each) do
         @owner = Factory(:user, :login => "ownerious")
+        @owner_wall = @owner.profile.wall
         @current_user = @friend = Factory(:user, :login => "friendous")
         @ability = Ability.new(@current_user)
 
@@ -73,16 +74,17 @@ describe Ability do
       end
 
       it "should can comment at wall owned by his friend" do
-        @ability.can?(:comment_at_wall, @owner.profile.wall).should be_true
+        @ability.can?(:comment_at_wall, @owner_wall).should be_true
       end
 
       it "should can reply at wall owned by his friend" do
-        @ability.can?(:reply_at_wall, @owner.profile.wall).should be_true
+        debugger
+        @ability.can?(:reply_at_wall, @owner_wall).should be_true
       end
 
       describe "can like graffity" do
         before(:each) do
-          @graffity = Factory(:graffity, :wall => @owner.profile.wall, :profile => @owner.profile)
+          @graffity = Factory(:graffity, :wall => @owner_wall, :profile => @owner.reload.profile)
         end
 
         it "because is a friend" do
@@ -91,24 +93,25 @@ describe Ability do
       end
     end
 
-    describe "no related member" do
+    context "no related member" do
       before(:each) do
-        @owner = Factory(:user, :login => "ownerious")
+        @owner = Factory(:user, :login => "ownerious").profile
+        @owner_wall = @owner.wall
         @current_user = Factory(:user, :login => "norelatious")
         @ability = Ability.new(@current_user)
       end
 
       it "should cannot comment at wall" do
-        @ability.cannot?(:comment_at_wall, @owner.profile.wall).should be_true
+        @ability.cannot?(:comment_at_wall, @owner_wall).should be_true
       end
 
       it "should cannot reply at wall" do
-        @ability.cannot?(:reply_at_wall, @owner.profile.wall).should be_true
+        @ability.cannot?(:reply_at_wall, @owner_wall).should be_true
       end
 
       describe "cannot like graffity" do
         before(:each) do
-          @graffity = Factory(:graffity, :wall => @owner.profile.wall, :profile => @owner.profile)
+          @graffity = Factory(:graffity, :wall => @owner_wall, :profile => @owner)
         end
 
         it "because is not related" do
@@ -134,8 +137,8 @@ describe Ability do
 
       it "should cannot if the writer isn't your friend" do
         @current_user = Factory(:member)
-        @writer = Factory(:member, :login => "writer")
-        @graffity = Factory(:graffity, :wall => @writer.profile.wall, :profile => @writer.profile)
+        @writer = Factory(:member, :login => "writer").profile
+        @graffity = Factory(:graffity, :wall => @writer.wall, :profile => @writer)
         @ability = Ability.new(@current_user)
 
         @ability.cannot?(:see_walltowall, @graffity).should be_true
@@ -143,9 +146,9 @@ describe Ability do
 
       it "should cannot if the owner isn't your friend" do
         @current_user = Factory(:member)
-        @writer = Factory(:member, :login => "writer")
-        @owner = Factory(:member, :login => "owner")
-        @graffity = Factory(:graffity, :wall => @owner.profile.wall, :profile => @writer.profile)
+        @writer = Factory(:member, :login => "writer").profile
+        @owner = Factory(:member, :login => "owner").profile
+        @graffity = Factory(:graffity, :wall => @owner.wall, :profile => @writer)
         @ability = Ability.new(@current_user)
 
         @ability.cannot?(:see_walltowall, @graffity).should be_true
@@ -153,11 +156,11 @@ describe Ability do
 
       it "should can if logged in pass a graffity and the writer and the owner are friends of the current user" do
         @current_user = Factory(:member)
-        @writer = Factory(:member, :login => "writer")
-        @owner = Factory(:member, :login => "owner")
-        @current_user.profile.add_friend(@writer.profile)
-        @current_user.profile.add_friend(@owner.profile)
-        @graffity = Factory(:graffity, :wall => @owner.profile.wall, :profile => @writer.profile)
+        @writer = Factory(:member, :login => "writer").profile
+        @owner = Factory(:member, :login => "owner").profile
+        @current_user.profile.add_friend(@writer)
+        @current_user.profile.add_friend(@owner)
+        @graffity = Factory(:graffity, :wall => @owner.wall, :profile => @writer)
         @ability = Ability.new(@current_user)
 
         @ability.can?(:see_walltowall, @graffity).should be_true

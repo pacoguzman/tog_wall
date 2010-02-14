@@ -27,7 +27,7 @@ en:
       site:
         comment:
           to_comment: Comment
-          to_like : Like
+          to_like: Like
       member:
         graffities:
           form:

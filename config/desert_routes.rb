@@ -7,4 +7,4 @@ namespace(:member) do |member|
   end
 end
 
-resource :wall, :path_prefix => 'profiles/:profile_id', :name_prefix => 'profile_', :only => [:show]
+profile_wall 'profiles/:profile_id/wall', :controller => "walls", :action => "show", :method => :get

@@ -27,7 +27,7 @@ es:
       site:
         comment:
           to_comment: Comentar
-          to_like : Me gusta
+          to_like: Me gusta
       member:
         graffities:
           form:
