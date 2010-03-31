@@ -1,15 +1,19 @@
 es:
+  interface:
+    site:
+      wall: Muro
   wall:
     datetimes:
       articulo_el: 'El '
       yesterday_at: 'Ayer a las '
   tog_wall:
+    see: ver
     cancel: Cancelar
     model:
       graffity:
         comment:
           label: Comentario
-          textarea: ¿Qué estas pensando?
+          textarea: ¿Qué estás pensando?
       reply:
         comment:
           label: Comment
@@ -18,7 +22,7 @@ es:
       walls:
         show:
           graffities:
-            not_found: No hay grafitis en este muro
+            not_found: No hay grafitis en este muro todavía
           show_more:
             button: Conversaciones anteriores
             loading: Cargando conversaciones anteriores...

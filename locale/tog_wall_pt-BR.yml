@@ -4,6 +4,7 @@ pt-BR:
       articulo_el: ' '
       yesterday_at: 'Yesterday at '
   tog_wall:
+    see: see  
     cancel : Cancel
     model:
       graffity:
@@ -18,7 +19,7 @@ pt-BR:
       walls:
         show:
           graffities:
-            not_found: There are not graffities in this wall
+            not_found: Any graffities in this wall
           show_more:
             button: Next graffities
             loading: Loading next graffities...

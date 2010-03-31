@@ -84,6 +84,8 @@ TODO
 More
 -------
 
+jQuery Form - [http://github.com/malsup/form](http://github.com/malsup/form)
+
 [http://github.com/pacoguzman/tog_wall](http://github.com/pacoguzman/tog_wall)
 
 [http://github.com/pacoguzman/tog_wall/wikis](http://github.com/pacoguzman/tog_wall/wikis)

@@ -51,11 +51,13 @@ class Member::GraffitiesController < Member::BaseController
     respond_to do |format|
       if can?(:like_graffity, @graffity) && @like.save && @like.move_to_child_of(@graffity)
         flash[:ok] = I18n.t("tog_core.site.comment.added") # "like added"
+        status = :created
       else
         flash[:error] = I18n.t("tog_core.site.comment.error_commenting") # "like error"
+        status = :unprocessable_entity
       end
       format.html { redirect_to request.referer }
-      format.js { render :like; flash.discard }
+      format.js { render :like, :status => status; flash.discard }
     end
   end
 

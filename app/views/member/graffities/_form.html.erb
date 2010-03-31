@@ -1,11 +1,9 @@
 <% form_for :graffity, :url => member_wall_graffities_path(@owner.wall), :html => {:id=>'graffity_form'} do |f| -%>
     <fieldset>
-      <div class="fields">
         <%= f.label :comment, I18n.t("tog_wall.model.graffity.comment.label"), :class => "hide" %>
         <%= f.text_area :comment, {:placeholder => I18n.t("tog_wall.model.graffity.comment.textarea"),
                                    :value => I18n.t("tog_wall.model.graffity.comment.textarea"), 
-                                   :rows=>3, :cols=>40, :class=>"placeholder"} -%>
-      </div>
+                                   :rows=>3, :cols=>55, :class=>"placeholder"} -%>
     </fieldset>
 
     <div class="actions">

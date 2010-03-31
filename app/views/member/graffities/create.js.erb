@@ -1,9 +1,11 @@
 <% if @graffity.approved && !@graffity.new_record? %>
-<% escaped_js = escape_javascript(render(:partial => "member/graffities/graffity", :object => @graffity)) %>        
-  if (jQuery("#graffities").children().length > 0)
+<% escaped_js = escape_javascript(render(:partial => "member/graffities/graffity", :object => @graffity)) %>
+  if (jQuery("#graffities").children().length > 0) {
     jQuery("#graffities").prepend("<%= escaped_js %>");
-  else
+  } else {
     jQuery("#graffities").replaceWith("<%= escaped_js %>");
+  }
+
   jQuery("textarea.reply", jQuery("#graffities")).filter(function(){
       return !(!!jQuery(this).data('events'));
   }).placeholder();        

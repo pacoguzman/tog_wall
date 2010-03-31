@@ -13,6 +13,3 @@ Tog::Plugins.settings :tog_wall,  'search.skip_indices' => false
 Tog::Plugins.helpers WallsHelper, GraffitiesHelper
 
 Tog::Search.sources << "Graffity"
-
-#Tog::Interface.sections(:admin).add "Users", "/admin/users"
-#Tog::Interface.sections(:member).add "My account", "/member/account"

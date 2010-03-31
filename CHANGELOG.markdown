@@ -1,6 +1,7 @@
 EDGE
 ----
 * Route refactor
+* Avoid double submiting in ajax forms
 
 0.1.1
 ----

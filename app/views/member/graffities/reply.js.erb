@@ -1,4 +1,4 @@
 <% if @reply.approved && !@reply.new_record? %>
     <% escaped_js = escape_javascript(render(:partial => "member/graffities/reply", :object => @reply)) %>
-    jQuery("#<%= "reply_div_to_#{@graffity.id}" %>").before("<%= escaped_js %>");
+    jQuery("#<%= "reply_to_#{@graffity.id}" %>").before("<%= escaped_js %>");
 <% end %>

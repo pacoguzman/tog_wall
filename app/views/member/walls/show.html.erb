@@ -1,6 +1,6 @@
 <% include_stylesheet "/tog_wall/stylesheets/personalization.css" %>
 <% include_javascript "/tog_wall/javascripts/lowpro.js" %>
-<% include_javascript "/tog_wall/javascripts/jquery-1.4.2.min.js" %>
+<% include_javascript "/tog_wall/javascripts/jquery-1.4.min.js" %>
 <% include_javascript "/tog_wall/javascripts/jquery.noconflict.js" %>
 <% include_javascript "/tog_wall/javascripts/jquery.form.js" %>
 <% include_javascript "/tog_wall/javascripts/jquery.wall.js" %>
@@ -9,9 +9,9 @@
 <% if can?(:comment_at_wall, @wall) %>
     <%= render "member/graffities/form" %>
 <% elsif !logged_in? %>
-    <%= I18n.t("tog_wall.views.walls.show.should_be_logged_and_be_friend", :name => @owner.full_name) %>
+    <%= "Debes iniciar sesión y ser amigo de #{@owner.full_name} para poder escribir comentarios en su muro" %>
 <% else %>
-    <%= I18n.t("tog_wall.views.walls.show.should_be_friend", :name => @owner.full_name) %>
+    <%= "Debes ser amigo de #{@owner.full_name} para poder escribir comentarios en su muro" %>
 <% end %>
 
 <div id="graffities" class="portlet portletJ">
@@ -22,14 +22,14 @@
   <% end -%>
 </div>
 
-<%= show_more_button(@graffities) %>
+<%= will_paginate @graffities, :renderer => FlowPagination::LinkRenderer %>
 
 <script language="JavaScript" type="text/javascript">
     //<![CDATA
     document.observe("dom:loaded", function() {
         // Comportaminentos javascript para las respuestas
         Event.addBehavior({
-            '#graffities > div[id^=graffity_]' : CollapsableReplies(<%= options_for_collapse_to_js %>)
+            '#graffities > div[id^=graffity_]' : CollapsableReplys(<%= options_for_collapse_to_js %>)
         });
     });
     //]]>

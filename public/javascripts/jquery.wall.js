@@ -1,133 +1,91 @@
 (function($) {
 
-    // http://github.com/mathiasbynens/Placeholder-jQuery-Plugin
-    $.fn.hints = function(options) {
-        var opts = $.extend({}, $.fn.hints.defaults, options);
+    var app_wall = {
 
-        return this.map(function(){
-                    jQuery(this).data("_default", jQuery(this).val());
-                    return this;
-                })
-                .bind('focusin', function(){
-                  element = $(this);
-                  if (element.data("_default") != element.val()) return;
-                  element.removeClass('hint').val('');
-                })
-                .bind('focusout', function(){
-                  element = $(this);
-                  if (element.val().strip() != '') return;
-                  element.addClass('hint').val(element.data("_default"));
-                })
-                .addClass('hint');
-    };
+       setupGraffityForm: function(){
+           $("#graffity_form").ajaxForm({
+               beforeSubmit : function(formData) {
+                   if ($(this).data('beenSubmited')) {
+                       return false;
+                   }
+                   $(this).data('beenSubmited', true);
+                   formData.push({name: 'format', value: 'js'});
+               },
+               clearForm : true,
+               complete : function() {
+                   $(this).data('beenSubmited', false);
+               },
+               success : function() {
+                   // #TODO desde aquí o desde la respuesta de la aplicación creo que aquí  mejor
+                   $(this).find("textarea").val('').trigger('focusout');
+                   // placeholder for the recent added textarea
+                   $("textarea.reply:first", $("#graffities")).placeholder();
+               }
+           });
+       },
 
-    $.fn.hints.defaults = {
-        className: "hint"
-    };
+       setupReplyForms: function(graffities) {
+            graffities.delegate("form.reply", 'submit', function() {
+                $form = $(this);
+                $form.ajaxSubmit({
+                    beforeSubmit : function(formData) {
+                        if ($form.data('beenSubmited')) {
+                            return false;
+                        }
+                        $form.data('beenSubmited', true);
+                        formData.push({name: 'format', value: 'js'});
+                    },
+                    clearForm : true,
+                    complete : function() {
+                        $form.data('beenSubmited', false);
+                    },
+                    success : function() {
+                        $form.find("textarea.reply").val('').trigger('focusout');
+                    }
+                });
 
-    $.fn.hintReplies = function(options) {
-        var opts = $.extend({}, $.fn.hintReplies.defaults, options);
+                return false;
+            });
+        }
 
-        return this.map(function(){
-                    jQuery(this).data("_default", jQuery(this).val());
-                    jQuery(this).data("_opts", opts);
-                    return this;
-                })
-                .bind('focusin', function(){
-                  element = $(this);
-                  if (element.data("_default") != element.val()) return;
-                  element
-                     .closest("form")
-                        .find(":button").show()
-                        .end()
-                        .find(":submit").show()
-                        .end()
-                        .find("div.avatar-tiny").show()
-                        .end()
-                     .end()
-                     .removeClass('hint').val('');
-                })
-                .bind('focusout', function(){
-                  element = $(this);
-                  if (element.val().strip() != '') return;
-                  element.addClass('hint').val(element.data("_default")).attr("rows", opts.rows)
-                      .closest("form")
-                         .find(":button").hide()
-                         .end()
-                         .find(":submit").hide()
-                         .end() 
-                         .find("div.avatar-tiny").hide()
-                         .end()
-                       .end();
-                })          
-                .addClass('hint');
-    };
-
-    $.fn.hintReplies.defaults = {
-        className: "hint",
-        message: "Escribe tu commentario...",
-        rows: 1
     };
 
     $(document).ready(function() {
         $.fn.ajaxSubmit.debug
 
-        $("#graffity_form").ajaxForm({
-          beforeSubmit : function(formData) {
-              formData.push({name: 'format', value: 'js'});
-          },
-          clearForm : true,
-          success : function(){
-              $(this).find("textarea").val('').trigger('focusout');
-              // placeholder for the recent added textarea
-             $("textarea.reply:first",$("#graffities")).placeholder();
-          }
-        });
+        $graffities = $("#graffities").get(0); // Used many times
 
-        $("textarea", $("#graffity_form")).placeholder();
+        app_wall.setupGraffityForm();
 
-        $("form.reply", $("#graffities").get(0)).live('submit', function(){
-          $form = $(this);
-          $(this).ajaxSubmit({
-              beforeSubmit : function(formData) {
-                formData.push({name: 'format', value: 'js'});
-              },
-              clearForm : true,
-              success : function(){
-                  $form.find("textarea.reply").val('').trigger('focusout');
-              }
-          });
+        app_wall.setupReplyForms($graffities);
 
-          return false;
-        });
+        $("textarea.placeholder", graffities).placeholder();
 
-        $("textarea.reply", $("#graffities")).placeholder();
-
-
-        $('a[id^="reply-to-"]', $("#graffities").get(0)).live('click', function(){
+        $graffities.delegate('a[id^="reply-to-"]', 'click', function(){
             $(this).closest(".graffity").find("textarea.reply").focus();
         });
 
-        $('form.reply input.cancel', $("#graffities").get(0)).live('click', function(){
+        $graffities.delegate('form.reply input.cancel', 'click', function(){
             $element = $(this).closest("form").find("textarea.reply");
             //TODO set rows default
             $element.val($element.attr("placeholder")).trigger("focusout");
         });
 
-        $("a.like", $("#graffities").get(0)).live('click', function(event){
+        $graffities.delegate("a.like", 'click', function(event){
             event.preventDefault();
-            $.get(this.href,{},function(){}, "script");
+            $.getScript(this.href,function(){});
         });
 
-        $("div[id^=collapsed] a", $("#graffities").get(0)).live('click', function(event){
+        $graffities.delegate("div[id^=collapsed] a", 'click', function(event){
            event.preventDefault();
-           $(this).closest("div").get(0).widget.uncollapse(); 
+           //TODO review the uncollapse code
+           $(this).closest("div").get(0).widget.uncollapse();
         });
 
         // Show more ajaxify link
         $("#show_more_button a").live('click', function(event){
            event.preventDefault();
-           $.get(this.href,{},function(){}, "script")
+           $.getScript(this.href,function(){});
         });
     });
 })(jQuery);

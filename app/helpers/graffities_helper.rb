@@ -3,7 +3,7 @@ module GraffitiesHelper
   def graffities_paginate_link(*args)
     options = args.extract_options!
     wall_id = params[:wall_id].present? ? params[:wall_id] : current_user.profile.wall.id
-    url = show_more_member_wall_graffities_path(wall_id, options[:last_graffity].id)
+    url = show_more_member_wall_graffities_path(wall_id, :id => options[:last_graffity].id)
 
     link_to content_tag(:span, t('tog_wall.views.walls.show.show_more.button')),
             url, :class => 'graffity_paginate_link button',
@@ -26,7 +26,7 @@ module GraffitiesHelper
   end
 
   def graffity_link_to_comment(graffity)
-    link_to I18n.t('tog_wall.views.site.comment.to_comment'), "#", :id => "reply-to-#{graffity.id}"
+    link_to I18n.t('tog_wall.views.site.comment.to_comment'), "#", :id => "reply-to-#{graffity.id}", :class => "reply"
   end
 
   def graffity_link_to_like(graffity)

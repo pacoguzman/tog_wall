@@ -17,7 +17,7 @@
                        .end();
         } else {
             return this;
-        };
+        }
     }; // Added by fjguzman
 
     $.fn.hideAsReply = function(){
@@ -32,16 +32,16 @@
                        .end();
         } else {
             return this;
-        };
+        }
     }; // Added by fjguzman
 
     $.fn.placeholder = function() {
         // Quit if there’s support for HTML5 placeholder
-        if (this[0] && 'placeholder' in document.createElement('input')) {
+        if (this.get(0).placeholder && 'placeholder' in document.createElement(this.tagName)) {
             // Allow chaining
             return this;
         };
-        
+
         // Made this a function, because we actually need it on two different occasions:
         // 1) Once when the DOM is loaded;
         // 2) Once every time the focusout() is triggered.
@@ -50,14 +50,14 @@
                 $elem.hideAsReply().addClass('placeholder').val($elem.attr('placeholder'));
             } else {
                 $elem.removeClass('placeholder');
-            };
+            }
         };
 
         function preventSubmit($elem) {
             if ($elem.val() === $elem.attr('placeholder')) {
                 $elem.val('').focus();
                 return false;
-            };
+            }
         };
 
         // Yes, .each() — in case .placeholder() is called on several elements, which is very likely, e.g. $('input').placeholder();
